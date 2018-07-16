@@ -1,80 +1,101 @@
-(function() {
-  'use strict';
+/*
+Copyright 2016 Google Inc.
 
-  var CACHE_NAME = 'static-cache';
-  var urlsToCache = [
-    '.',
-    'index.html',
-    'about.html',
-    'modernizr-custom.js',
-    'styles/main.css',
-    'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css',
-    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js',
-    'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js',
-    'https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i',
-    'https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i',
-    'css/business-casual.min.css',
-    'css/business-casual.css',
-    'vendor/bootstrap/css/bootstrap.css',
-    'vendor/bootstrap/css/bootstrap.css.map',
-    'vendor/bootstrap/css/bootstrap.min.css',
-    'vendor/bootstrap/css/bootstrap.min.css.map',
-    'vendor/bootstrap/js/bootstrap.bundle.js',
-    'vendor/bootstrap/js/bootstrap.bundle.js.map',
-    'vendor/bootstrap/js/bootstrap.bundle.min.js',
-    'vendor/bootstrap/js/bootstrap.bundle.min.js.map',
-    'vendor/bootstrap/js/bootstrap.js',
-    'vendor/bootstrap/js/bootstrap.js.map',
-    'vendor/bootstrap/js/bootstrap.min.js',
-    'vendor/bootstrap/js/bootstrap.min.js.map',
-    'vendor/jquery/jquery.js',
-    'vendor/jquery/jquery.min.js',
-    'vendor/jquery/jquery.min.map',
-    'vendor/jquery/jquery.slim.js',
-    'vendor/jquery/jquery.slim.min.js',
-    'vendor/jquery/jquery.slim.min.map',
-    'images/',
-    'img/',
-    'gallery.html',
-    
-  ];
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-  self.addEventListener('install', function(event) {
-    event.waitUntil(
-      caches.open(CACHE_NAME)
-      .then(function(cache) {
-        return cache.addAll(urlsToCache);
-      })
-    );
-  });
+    http://www.apache.org/licenses/LICENSE-2.0
 
-  self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request)
-      .then(function(response) {
-        return response || fetchAndCache(event.request);
-      })
-    );
-  });
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+// This file will be replaced by the generated service worker when we work with
+// the sw-precache and sw-toolbox libraries.
 
-  function fetchAndCache(url) {
-    return fetch(url)
-    .then(function(response) {
-      // Check if we received a valid response
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return caches.open(CACHE_NAME)
-      .then(function(cache) {
-        cache.put(url, response.clone());
-        return response;
-      });
+// TODO SW-3 - cache the application shell
+var filesToCache = [
+  '/',
+  'index.html',
+  'scripts/main.min.js',
+  'modernizr-custom.js',
+  'styles/main.css', 
+  'images/products/batik1.jpg',
+  'images/products/batik2.jpg',
+  'images/products/batik3.jpg',
+  'images/products/batik4.jpg',
+  'images/products/batik5.jpg',
+  'images/products/batik6.jpg',
+  'images/products/batik7.jpg',
+  'images/products/batik8.jpg',
+  'images/products/batik9.jpg',
+  'images/touch/apple-touch-icon1.png',
+  'images/touch/chrome-touch-icon1-192x192.png',
+  'images/touch/icon1-128x128.png',
+  'images/touch/ms-touch-icon1-144x144-precomposed.png',
+  'images/about-hero-image.jpg',
+  'images/delete.svg',
+  'images/footer-background.png',
+  'images/hamburger.svg',
+  'images/header-bg.jpg',
+  'images/bg.jpg',
+  'images/intro.jpg',
+  'jquery.js',
+  'jquery.min.js',
+  'images/logo.png'
+];
+
+var staticCacheName = 'e-commerce-v1';
+
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(staticCacheName)
+    .then(function(cache) {
+      return cache.addAll(filesToCache);
     })
-    .catch(function(error) {
-      console.log('Request failed:', error);
-      // You could return a custom offline 404 page here
-    });
-  }
+  );
+});
 
-})();
+self.addEventListener('fetch', function(event) {
+  if (event.request.method === 'GET') {
+    event.respondWith(
+      caches.match(event.request).then(function(response) {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(function(response) {
+          return caches.open(staticCacheName).then(function(cache) {
+            cache.put(event.request.url, response.clone());
+            return response;
+          });
+        });
+      })
+    );
+  }
+});
+
+self.addEventListener('activate', function(event) {
+  console.log('Activating new service worker...');
+
+  var cacheWhitelist = [staticCacheName];
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+// TODO SW-4 - use the cache-first strategy to fetch and cache resources in the
+// fetch event listener
+
+// TODO SW-5 - delete outdated caches in the activate event listener

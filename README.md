@@ -1,3 +1,2 @@
-# web_project
-
-tamvan programming
+# batik_mulyo
+tugas web mobile

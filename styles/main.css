@@ -1,89 +1,285 @@
+/*
+Copyright 2016 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/* TODO Rename .portfolio- classes appropriately */
+/* TODO Audit custom CSS class usage, delete unneeded */
+
+.portfolio-header {
+  position: relative;
+  background-image: url(../images/header-bg.jpg);
+}
+
+.portfolio-header .mdl-layout__header-row {
+  padding: 0;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mdl-layout__title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.is-compact .mdl-layout__title span {
+  display: none;
+}
+
+.portfolio-logo-row {
+  min-height: 200px;
+}
+
+.is-compact .portfolio-logo-row {
+  min-height: auto;
+}
+
+.portfolio-logo {
+  background: url(../images/logo.png) 50% no-repeat;
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+  margin: auto auto 10px;
+}
+
+.is-compact .portfolio-logo {
+  display: none;
+}
+
+.portfolio-navigation-row {
+  text-transform: uppercase;
+  height: 45px;
+}
+
+.portfolio-navigation-row  .mdl-navigation {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.portfolio-navigation-row .mdl-navigation__link {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  line-height: 42px;
+}
+
+.portfolio-header .mdl-layout__drawer-button {
+    background-color: rgba(197, 197, 197, 0.44);
+}
+
+.portfolio-navigation-row .is-active {
+  position: relative;
+  font-weight: bold;
+}
+
+.portfolio-navigation-row .is-active:after {
+  content: "";
+  width: 70%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(255,64,129);
+  left: 15%;
+}
+
+.portfolio-card .mdl-card__title {
+  padding-bottom: 0;
+}
+
+.portfolio-blog-card-full-bg {
+  background: url(images/example-blog03.jpg) center / cover;
+}
+
+.portfolio-blog-card-event-bg {
+  background: url(images/example-blog05.jpg) center / cover;
+}
+
+.portfolio-blog-card-strip-bg {
+  background: url(images/example-blog06.jpg) center / cover;
+}
+
+.portfolio-blog-card-compact .mdl-card__title {
+  padding-bottom: 0;
+}
+
+.portfolio-blog-card-bg > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+img.article-image {
+  width: 100%;
+  height: auto;
+}
+
+.portfolio-max-width {
+  max-width: 900px;
+  margin: auto;
+}
+
+.portfolio-copy {
+  max-width: 700px;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-left-padding{
+  padding-left: 0;
+}
+
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
+.padding-top {
+  padding: 10px 0 0;
+}
+
+.portfolio-share-btn {
+  position: relative;
+  float: right;
+  top: -4px;
+}
+
+.demo-card-event > .mdl-card__actions {
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.portfolio-contact .mdl-textfield {
+  width: 100%;
+}
+
+.portfolio-contact form {
+  max-width: 550px;
+  margin: auto;
+}
+
+footer {
+  background-image: url(../images/footer-background.png);
+  background-size: cover;
+  font-size: 0.75em;
+}
+
+img.delete {
+  height: 24px;
+  padding: 0;
+}
+
+fieldset {
+  margin: 35px 0;
+}
 /* main.css */
 
 
 .header {
-    background-image: url("../images/header.jpg");
-    color: #ffffff;
-    padding: 3vw;
+  background-image: url("../images/header.jpg");
+  color: #ffffff;
+  padding: 3vw;
 }
 .halaman {
-    background-image: url("../images/halaman.jpg");
-    color: #ffffff;
-    padding: 0.1vw;
-    margin-top: 1em;
-    text-align: center;
+  background-image: url("../images/halaman.jpg");
+  color: #ffffff;
+  padding: 0.1vw;
+  margin-top: 1em;
+  text-align: center;
 }
 
 
 .container {
-  overflow: auto;
-  align-items: center;
-  margin-top: 2em;
-  text-align: center;
-  font-size: 1em;
-  font-weight: 300;
-  line-height: 1.6em;
-  font-family: 'Roboto condensed', sans-serif;
-  width: 75%;
+overflow: auto;
+align-items: center;
+margin-top: 2em;
+text-align: center;
+font-size: 1em;
+font-weight: 300;
+line-height: 1.6em;
+font-family: 'Roboto condensed', sans-serif;
+width: 75%;
 }
 
 .footer {
-    background-color: #a3a375;
-    color: #ffffff;
-    text-align: center;
-    font-size: 18;
-    padding: 2em;
+  background-color: #a3a375;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18;
+  padding: 2em;
 
 }
 .container  .col  {
-        width:  100%;
-    }
+      width:  100%;
+  }
 .container .col1 {
-    width: 33%;
-    padding: 30px 3.15% 0;
-    float: left;
+  width: 33%;
+  padding: 30px 3.15% 0;
+  float: left;
 }
 @media  screen  and (max-width: 800px)  {
-    .container  .col  {
-        width:  95%;
-    }
-    .container  .col1 {
-        width:  90%;
-    }
+  .container  .col  {
+      width:  95%;
   }
- 
+  .container  .col1 {
+      width:  90%;
+  }
+}
+
 img {
-    width:  60%;
+  width:  60%;
 }
 
 /* TODO 4.1 - display the SFO image at 50vw */
 img#sfo {
-    transition: width 0.5s;
-    max-width:  50vw;
+  transition: width 0.5s;
+  max-width:  50vw;
 }
 img#sfo1 {
-    transition: width 0.5s;
-    width:  50%;
+  transition: width 0.5s;
+  width:  50%;
 }
 
 /* TODO 5.1 - add a media query */
 
 @media  screen  and (max-width: 700px)  {
-    img#sfo {
-        max-width:  90vw;
-        width:  90vw;
-    }
+  img#sfo {
+      max-width:  90vw;
+      width:  90vw;
+  }
 }
 figure {
-  margin: 1em 0 1em 0;
+margin: 1em 0 1em 0;
 
 }
 .bg-4 { 
-      background-color: #2f2f2f; /* Black Gray */
-      color: #fff;
-  }
-  a {
-    color:#000000;
-    font-family: arial;
-  }
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+}
+a {
+  color:#000000;
+  font-family: arial;
+}
+
 
